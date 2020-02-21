@@ -1,0 +1,12 @@
+---
+layout: default
+pagination:
+    enabled: true
+description: "A great Jekyll theme developed by Sal @wowthemesnet."
+---
+
+<ul style="list-style-type:none">
+{% for post in site.posts %}
+  <li><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}<br /><a href="{{ post.url }}">{{ post.title }}</a>{{ post.excerpt }}</li>
+{% endfor %}
+</ul>
