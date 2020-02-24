@@ -6,11 +6,11 @@ description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 ---
 <div class="footer-col-wrapper">
 	<div class="footer-col footer-col-1">
-		<img src="https://avatars1.githubusercontent.com/u/11070656?s=460&v=4" width="200px;">
+		<img src="https://avatars1.githubusercontent.com/u/11070656?s=460&v=4" width="150px;">
 	</div>
-	<div class="footer-col footer-col-2">
+	<div class="footer-col footer-col-3">
 		<ul class="contact-list">
-			<li style="font-weight: bold;">Maulana Saputra</li>
+			<li style="font-weight: bold; font-size: 24px;">Maulana Saputra</li>
 			<li>Back End Developer</li>
 		</ul>
 	</div>
@@ -20,7 +20,7 @@ description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 	<font class="post-meta" style="font-weight: bold;">Blog Saya</font>
 	<ul class="post-list">
 	{% for post in paginator.posts %}
-	  <li><span class="post-meta"><font style="font-size: 11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br /><a href="{{ post.url }}">{{ post.title }}</a>{{ post.excerpt }}</li>
+	  <li><span class="post-meta"><a href="{{ post.url }}" style="font-size: 20px;">{{ post.title }}</a><br /><font style="font-size: 11px;">{{ post.date | date: "%b %-d, %Y" }}</font>{{ post.excerpt }}</li>
 	{% endfor %}
 	</ul>
 

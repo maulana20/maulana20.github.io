@@ -1,10 +1,10 @@
 title: Selamat Datang
-email: maulanasaputra11091082@gmail.com
-description: Maulana Saputra
+author:
+  name: Maulana Saputra
+  email: maulanasaputra11091082@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  maulana20
-gitlab_username:  maulana20
 linkedin_username: maulana-saputra-a58711b7
 
 # Build settings
