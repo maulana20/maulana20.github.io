@@ -4,22 +4,37 @@ pagination:
     enabled: true
 description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 ---
-<ul style="list-style-type:none">
-{% for post in paginator.posts %}
-  <li><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}<br /><a href="{{ post.url }}">{{ post.title }}</a>{{ post.excerpt }}</li>
-{% endfor %}
-</ul>
+<div class="footer-col-wrapper">
+	<div class="footer-col footer-col-1">
+		<img src="https://avatars1.githubusercontent.com/u/11070656?s=460&v=4" width="200px;">
+	</div>
+	<div class="footer-col footer-col-2">
+		<ul class="contact-list">
+			<li style="font-weight: bold;">Maulana Saputra</li>
+			<li>Back End Developer</li>
+		</ul>
+	</div>
+</div>
 
-{% if site.paginate %}
-	{% if paginator.total_pages > 1 %}
-	<ul> 
-		{% if paginator.previous_page %}
-			<a href="{{ paginator.previous_page_path }}" class="post-meta">&laquo; Previous</a>
-		{% endif %}
-		<span class="post-meta">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-		{% if paginator.next_page %}
-			<a href="{{ paginator.next_page_path }}" class="post-meta">Next &raquo;</a>
-		{% endif %}
+<div class="page-content">
+	<font class="post-meta" style="font-weight: bold;">Blog Saya</font>
+	<ul class="post-list">
+	{% for post in paginator.posts %}
+	  <li><span class="post-meta"><font style="font-size: 11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br /><a href="{{ post.url }}">{{ post.title }}</a>{{ post.excerpt }}</li>
+	{% endfor %}
 	</ul>
-	{% endif %}      
-{% endif %}
+
+	{% if site.paginate %}
+		{% if paginator.total_pages > 1 %}
+		<ul class="post-list"> 
+			{% if paginator.previous_page %}
+				<a href="{{ paginator.previous_page_path }}" class="post-meta">&laquo; Previous</a>
+			{% endif %}
+			<span class="post-meta">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+			{% if paginator.next_page %}
+				<a href="{{ paginator.next_page_path }}" class="post-meta">Next &raquo;</a>
+			{% endif %}
+		</ul>
+		{% endif %}      
+	{% endif %}
+</div>
