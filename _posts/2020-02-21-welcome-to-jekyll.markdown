@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2020-02-21 10:47:59 +0700
+title: "Welcome to Jekyll!"
+date: 2020-02-21 10:47:59 +0700
 categories: introduction
 description: Jekyll is a blog.
+image: "https://avatars1.githubusercontent.com/u/11070656?s=460&v=4"
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 

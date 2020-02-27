@@ -14,14 +14,21 @@ description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 		</ul>
 	</div>
 </div>
+<div style="padding-top:20px; font-family:'Comic Sans MS', cursive, sans-serif; font-weight:bold; text-align:center; font-size:20px;">-- My Blog --</div>
 <div class="page-content">
-	<font class="post-meta" style="font-weight: bold;">Blog Saya</font>
 	<ul class="post-list">
 	{% for post in paginator.posts %}
-		<li>
-			<a href="{{ post.url }}" style="font-size: 20px;">{{ post.title }}</a><br />
-			<font style="font-size: 11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br />
-			{{ post.description }}
+		<li style="border:1px solid #e0e0e0; border-radius:10px;">
+			<div style="display:flex;">
+				<div style="margin:20px; width:20%;">
+					<img src="{{ post.image }}" width="80px" height="80px" style="border-radius:10px;">
+				</div>
+				<div style="margin:20px 10px 20px 0px; width:80%;">
+					<a href="{{ post.url }}" style="font-size: 20px;">{{ post.title }}</a><br />
+					<font style="font-size: 11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br />
+					{{ post.description }}
+				</div>
+			</div>
 		</li>
 	{% endfor %}
 	</ul>
