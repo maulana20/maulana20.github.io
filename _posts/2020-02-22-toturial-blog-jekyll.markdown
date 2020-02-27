@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tutorial Blog Jekyll dan sebagainya dari atas sampai bawah saja
+title: Tutorial Blog Jekyll
 categories: information
 tag: hot
 fullview: false/true
