@@ -16,26 +16,9 @@ description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 </div>
 <div style="padding-top:20px; font-family:'Comic Sans MS', cursive, sans-serif; font-weight:bold; text-align:center; font-size:20px;">-- My Blog --</div>
 <div class="page-content">
-	<ul class="post-list">
-	{% for post in paginator.posts %}
-		<li style="border:1px solid #e0e0e0; border-radius:10px;">
-			<div style="display:flex;">
-				<div style="margin:20px; width:15%;">
-					<img src="{{ post.image }}" width="65px" height="65px" style="border-radius:10px;">
-				</div>
-				<div style="margin:20px 10px 20px 0px; width:85%;">
-					<a href="{{ post.url }}" style="font-size:15px; font-weight:bold;">{{ post.title }}</a><br />
-					<font style="font-size:11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br />
-					<font style="font-size:14px;">{{ post.description }}</font>
-				</div>
-			</div>
-		</li>
-	{% endfor %}
-	</ul>
-
 	{% if site.paginate %}
 		{% if paginator.total_pages > 1 %}
-		<ul class="post-list"> 
+		<ul class="post-list" style="text-align:center;"> 
 			{% if paginator.previous_page %}
 				<a href="{{ paginator.previous_page_path }}" class="post-meta">&laquo; Previous</a>
 			{% endif %}
@@ -46,4 +29,19 @@ description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 		</ul>
 		{% endif %}      
 	{% endif %}
+	<ul class="post-list">
+	{% for post in paginator.posts %}
+		<li>
+			<div style="display:flex;">
+				<div style="margin:10px; width:20%;">
+					<img src="{{ post.image }}" width="70px" height="70px" style="border-radius:10px;">
+				</div>
+				<div style="margin:10px 10px 20px 0px; width:80%;">
+					<a href="{{ post.url }}" style="font-size:15px; font-weight:bold;">{{ post.title }}</a><br />
+					<font style="font-size:11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br />
+				</div>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
 </div>

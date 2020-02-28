@@ -6,5 +6,11 @@ layout: default
 	<div style="margin:10px;"><img src="https://avatars1.githubusercontent.com/u/11070656?s=460&v=4" style="width: 60px; height: 60px; border-radius: 100%;"></div>
 	<div style="margin:10px;">Maulana Saputra<br><span class="post-meta" style="font-size:14px;">{{ page.date | date_to_string }} - {{ page.author }}</span></div>
 </div>
+<div style="position:sticky;">
+	<div style="position:absolute; height:90%; width:100%; background-image:url('{{ page.image }}'); background-size:cover; background-repeat:no-repeat; background-position:center; filter:blur(2px);"></div>
+	<div align="center" style="backdrop-filter:blur(10px)">
+		<img src="{{ page.image }}" style="height:300px;">
+	</div>
+</div>
 
 {{ content }}
