@@ -2,9 +2,15 @@
 layout: default
 ---
 <h1>{{ page.title }}</h1>
-<div style="display:flex;">
-	<div style="margin:10px;"><img src="https://avatars1.githubusercontent.com/u/11070656?s=460&v=4" style="width: 60px; height: 60px; border-radius: 100%;"></div>
-	<div style="margin:10px;">Maulana Saputra<br><span class="post-meta" style="font-size:14px;">{{ page.date | date_to_string }} - {{ page.author }}</span></div>
+<div style="display:flex; padding: 10px 0 10px 0;">
+	<div style="margin:10px;"><img src="https://avatars1.githubusercontent.com/u/11070656?s=460&v=4" style="width:65px; height:65px; border-radius:100%;"></div>
+	<div style="margin:10px;">
+		<ul style="margin:0; list-style-type:none;">
+			<li>Maulana Saputra</li>
+			<li style="margin-top:-5px;"><span class="post-meta" style="font-size:11px;">{{ page.date | date_to_string }} - {{ page.author }}</span></li>
+			<li style="margin-top:-5px;"><a rel="me" href="{{ page.github }}" title="{{ page.github }}" style="font-size:10px;"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg>{{ page.github }}</a></li>
+		</ul>
+	</div>
 </div>
 <div style="position:sticky; padding: 10px 0 20px 0;">
 	<div style="position:absolute; height:90%; width:100%; background-image:url('{{ page.image }}'); background-size:cover; background-repeat:no-repeat; background-position:center; filter:blur(2px);"></div>

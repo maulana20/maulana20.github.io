@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Cara Mudah Membuat Telegram Bot
+github: https://gitlab.com/maulana20/telegram-bot
 image: https://gitlab.com/maulana20/telegram-bot/-/raw/master/screen/telegram.png
 ---
 ## Getting Started
