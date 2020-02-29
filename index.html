@@ -29,18 +29,11 @@ description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 		</ul>
 		{% endif %}      
 	{% endif %}
-	<ul class="post-list">
+	<ul style="margin:0; list-style-type:none;">
 	{% for post in paginator.posts %}
-		<li>
-			<div style="display:flex;">
-				<div style="margin:10px; width:20%;">
-					<img src="{{ post.image }}" width="70px" height="70px" style="border-radius:10px;">
-				</div>
-				<div style="margin:10px 10px 20px 0px; width:80%;">
-					<a href="{{ post.url }}" style="font-size:15px; font-weight:bold;">{{ post.title }}</a><br />
-					<font style="font-size:11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br />
-				</div>
-			</div>
+		<li style="padding-bottom:10px;">
+			<a href="{{ post.url }}" style="font-size:16px; font-weight:bold;">{{ post.title }}</a><br />
+			<font style="font-size:11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br />
 		</li>
 	{% endfor %}
 	</ul>

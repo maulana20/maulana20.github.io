@@ -1,9 +1,6 @@
 ---
 layout: post
 title: Cara Mudah Membuat Telegram Bot
-date: 2020-02-21 10:47:59 +0700
-categories: introduction
-description: Jekyll is a blog.
 image: https://gitlab.com/maulana20/telegram-bot/-/raw/master/screen/telegram.png
 ---
 ## Getting Started
