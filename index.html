@@ -5,8 +5,8 @@ pagination:
 description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 ---
 <div style="position:sticky;">
-	<div style="position:absolute; height:90%; width:100%; background-image:url('https://avatars1.githubusercontent.com/u/11070656?s=460&v=4'); background-size:cover; background-repeat:no-repeat; background-position:center; filter:blur(2px);"></div>
-	<div align="center" style="padding:20px; backdrop-filter:blur(10px)">
+	<div style="position:absolute; height:90%; width:100%; background-image:url('https://avatars1.githubusercontent.com/u/11070656?s=460&v=4'); background-size:cover; background-repeat:no-repeat; background-position:center; filter:blur(2px); border-radius:10px;"></div>
+	<div align="center" style="padding:20px; backdrop-filter:blur(10px); border-radius:10px;">
 		<img src="https://avatars1.githubusercontent.com/u/11070656?s=460&v=4" style="width: 100px; height: 100px; border-radius: 100%;">
 		<ul class="contact-list">
 			<li style="font-weight: bold; font-size: 24px;">𝓜𝓪𝓾𝓵𝓪𝓷𝓪 𝓢𝓪𝓹𝓾𝓽𝓻𝓪</li>
@@ -32,8 +32,11 @@ description: "Sebagai pembelajaran membuat blog dengan jekyll pada github."
 	<ul style="margin:0; list-style-type:none;">
 	{% for post in paginator.posts %}
 		<li style="padding-bottom:10px;">
-			<a href="{{ post.url }}" style="font-size:16px; font-weight:bold;">{{ post.title }}</a><br />
-			<font style="font-size:11px;">{{ post.date | date: "%b %-d, %Y" }}</font><br />
+			<ul style="margin:0; list-style-type:none;">
+				<li><a href="{{ post.url }}" style="font-size:18px; font-weight:bold;">{{ post.title }}</a></li>
+				<li style="margin-top:-5px;"><font class="post-meta" style="font-size:11px;">{{ post.category }}</font></li>
+				<li style="margin-top:-5px;"><font style="font-size:11px;">{{ post.date | date: "%b %-d, %Y" }}</font></li>
+			</ul>
 		</li>
 	{% endfor %}
 	</ul>
