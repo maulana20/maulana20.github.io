@@ -3,7 +3,7 @@ layout: post
 title: Cara Mudah Membuat Telegram Bot
 github: https://gitlab.com/maulana20/telegram-bot
 image: https://gitlab.com/maulana20/telegram-bot/-/raw/master/screen/telegram.png
-category: python
+language: python
 ---
 Kita mungkin mengenal aplikasi chating Whatsapp, Line, dll, namun ada salah satu lagi chating yang tidak kalah menarik yaitu telegram. Sebelum kita lanjut kalian seharusnya sudah bisa menggunakan telegram.
 
@@ -11,13 +11,13 @@ Ok. Apa itu <b>bot telegram</b> ? Bot itu adalah mesin, layaknya mesin chatting 
 
 Lalu Bagaimana <b>cara menggunakan</b> ? Apakah bisa langsung jalan ? Mungkin untuk penggunaannya dilakukan secara bertahap diantaranya :
 - Membuat <b>Telegram Bot</b>
-- Konfigurasi <b>Telegram API</b> 
+- Integrasi <b>Telegram API</b> 
 
 ### 1. Membuat Telegram Bot
 Untuk awal pembuatan bot lakukan pencarian @BotFather pada telegram. Apa itu <b>@BotFather</b> ? yaitu bot yang gunanya untuk menciptakan bot yang masih belum bisa di gunakan (botnya saja) atau dengan kata lain kamu buat botnya disana. lalu lakukan step pada sumber [link](https://www.petanikode.com/bot-telegram-tanpa-coding/) berikut untuk mendapatkan token dari bot kamu.
 
-### 2. Konfigurasi Telegram API
-Berikutnya setelah mendapatkan token pada bot yang telah kita buat lalu mulai lanjut dengan konfigurasi pada telegram apinya. Referensi untuk telegram api langkahnya pada sumber [link](https://core.telegram.org/bots/api) tersebut.
+### 2. Integrasi Telegram API
+Berikutnya setelah mendapatkan token pada bot yang telah kita buat lalu mulai lanjut dengan mengintegrasikan pada telegram apinya. Referensi untuk telegram api langkahnya pada sumber [link](https://core.telegram.org/bots/api) tersebut.
 
 Menjalankan API dengan script, terlebih dahulu sudah menginstall phyton >= 3.6.0
 ```bash
@@ -56,6 +56,10 @@ class TelegramBot:
 		res_json = json.loads(response.text)
 		
 		return res_json['result']
+	def message(self, chat_id, text):
+		self.send('sendMessage', {'chat_id': chat_id, 'text': text})
+		
+		return
 
 host = 'https://api.telegram.org'
 token = 'xxx'
@@ -63,13 +67,18 @@ token = 'xxx'
 telegram = TelegramBot(host, token)
 last_update = []
 last_update = telegram.send('getUpdates', {})
+
+# chat_id = last_update['chat']['id']
+# telegram.message(chat_id, 'hai')
 ```
 jalankan dengan
 ```bash
 py run.py
 ```
-maka last_update menghasilkan data json hasil dari API Telegram, lakukan hingga bisa melakukan interaksi dengan bot seperti berikut.
+maka <b>last_update</b> menghasilkan parsing data json dalam bentuk array dari hasil API, jika sebelumnya sudah pernah mengirim pesan pada bot maka akan ada response <b>chat_id</b> dari siapa yang mengirim pesan tersebut. Kalian bisa mengirimkan pesan pada chat_id tersebut, lalu pesan kembali akan terkirim kepada pengirim pesan.
+
+Lakukan hingga bisa melakukan interaksi dengan bot seperti berikut.
 
 <img src='https://gitlab.com/maulana20/telegram-bot/-/raw/master/screen/telegram.png' width='350' height='350'>&nbsp;&nbsp;&nbsp;<img src='https://gitlab.com/maulana20/telegram-bot/-/raw/master/screen/command.png' width='350' height='350'>
 
-Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://gitlab.com/maulana20/telegram-bot) tersebut
+Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://gitlab.com/maulana20/telegram-bot) tersebut.
