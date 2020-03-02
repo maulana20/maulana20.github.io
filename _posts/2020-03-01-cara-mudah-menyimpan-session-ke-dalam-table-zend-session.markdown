@@ -9,7 +9,7 @@ Di beberapa framework mungkin kita mengenal php framework diantaranya laravel, s
 
 Zend Framework bersifat open source, struktur dan komponen sangatlah <b>fleksibel</b> dan <b>arsitektur</b> yang bisa <b>ditambah</b> sehingga memungkinkan pengembang untuk menggunakan komponen secara <b>individual</b> "Use-At-Will".
 
-Dari awal release 2007 Zend Framework 1 hingga sekarang <b>Zend Framework 3</b> release perkembangan terus di lakukan dari penggunaan download folder library zend (path) hingga saat ini (Zend Framework 3) mengikuti perkembangan dengan composer (psr-4 autoloading) dan di kembangkan kembali <b>menjadi</b> <b>Laminas Project</b> (fondation community-supported) dan sudah <b>support</b> pada <b>PHP 7</b>.
+Dari awal release 2007 Zend Framework 1 hingga sekarang <b>Zend Framework 3</b> release, perkembangan terus di lakukan dari download bundle library zend (path) hingga melalui composer (psr-4 autoload) sesuai kebutuhan. Zend Framework di kembangkan kembali dan menjadi <b>Laminas Project</b> (fondation community-supported).
 
 Oke lanjut, pastikan kalian sudah menginstall di antaranya :
 - php 7
@@ -18,13 +18,13 @@ Oke lanjut, pastikan kalian sudah menginstall di antaranya :
 
 Lalu ambil repo [link](https://gitlab.com/maulana20/zf3-table-session) tersebut.
 
-Kemudian ambil require package library zend sesuai yang ada composer.json dengan perintah
+Kemudian ambil package yang dibutuhkan pada library zend sesuai yang ada composer.json dengan perintah
 ```bash
 composer install
 ```
-package library kemudian akan di download. Jika sudah, import database ke mysql atau phpmyadmin dengan sql pada folder database/zend_session.sql .
+package library tsb kemudian akan di download. Jika sudah, import database ke mysql atau phpmyadmin dengan sql pada folder database/zend_session.sql .
 
-Kemudah jalankan PHP web server
+Kemudah jalankan PHP web server.
 ```bash
 php -S 0.0.0.0:4000 -t public public/index.php
 ```
@@ -53,14 +53,14 @@ dari gambar diatas ada 3 proses yang di jalankan :
 ### 1. Authentication
 Pada saat login kita memasukan user dan password dengan admin, dimana dengan mengecek user admin pada database.
 
-library require yang di gunakan pada composer.json
+library yang di gunakan pada composer.json
 ```bash
 "zendframework/zend-db": "^2.10"
 ```
 
 Ok, kita lewati tutorial dari [https://docs.zendframework.com](https://docs.zendframework.com) , disini mengkoneksikan database terdapat konfigurasi dengan penggabungan <b>Zend TableGateway</b> dan <b>Zend Adapter</b>.
 
-lihat pada Table_Gateway_Adapter.php
+lihat pada module/application/model/Table_Gateway_Adapter.php
 ```html
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter;
@@ -84,9 +84,9 @@ $user->isUserPassword($post['user'], $post['password']);
 di sini tabel user terhubung dengan tabel group dengan beberapa access role, penjelasan lebih lanjut ada pada step berikutnya.
 
 ### 2. Authorization
-Setelah login access role akan di setting sesuai group pada user tersebut. Setting role tersebut kita gunakan <b>Zend Acl</b>.
+Setelah login access role akan di setting sesuai group pada user tersebut. Role tersebut kita gunakan <b>Zend Acl</b>.
 
-library require yang di gunakan pada composer.json
+library yang di butuhkan pada composer.json
 ```bash
 "zendframework/zend-permissions-acl": "^2.7"
 ```
@@ -95,15 +95,14 @@ apa itu <b>Zend Acl</b> ? yaitu penentuan menu apa saja yang bisa di jalankan pa
 ```html
 use Zend\Permissions\Acl\Acl;
 
-AdminController.php method login
+// module/administration/controller/AdminController.php action login
 
 $access = $group->getAccess($group_id); // access pada group
 $access = unserialize($access);
 $this->setRole($access);
 
-ParentController.php method setRole
+// module/application/controller/ParentController.php action setRole
 
-$group = new Group();
 $acl = new Acl();
 $access_all = $group->getAccessAll(); // access pada profile (seluruh access)
 
@@ -116,6 +115,72 @@ foreach ($allow as $a) {
 
 $this->session->acl = serialize($acl);
 ```
-seluruh acl akan di simpan ke dalam session, penjelasan lebih lanjut ada pada step berikutnya.
-### 2. Session
-test
+seluruh acl sudah di bentuk, contoh role access menu :
+```html
+// module/administration/controller/UserController.php action list
+$this->checkRole('ADMINISTRATION');
+$this->checkRole('USER');
+```
+jika tidak ada akses, maka proses tidak akan dilanjutkan. Lihat pada module/application/controller/ParentController.php action checkRole
+
+untuk acl di simpan ke dalam session, penjelasan lebih lanjut ada pada step berikutnya.
+### 3. Session
+Session disini menggunakan <b>Zend Session</b>. Apa itu Zend Session ? yaitu seluruh aktivitas yang berhubungan dengan interaksi user pada sebuah web yang tersimpan di browser.
+
+library yang di butuhkan pada composer.json
+```bash
+"zendframework/zend-session": "^2.8"
+```
+setelah login, seluruh aktivitas untuk kebutuhan web di simpan ke dalam session pada browser untuk di panggil kembali.
+```html
+// module/application/controller/ParentController.php
+use Zend\Session\Container;
+
+public $session = NULL;
+
+// method setUp
+$this->session = new Container('namespace');
+
+// module/application/controller/ParentController.php action login
+$this->session->user_id = $user_id;
+$this->session->user_name = $row['user_name'];
+$this->session->group_id = $group_id;
+```
+ParentController disini sebagai handling untuk tiap controller dari action, menu, access, dan session.
+```html
+// module/application/controller/ParentController.php method onDispatch
+$controller = $event->getTarget();
+$controllerClass = get_class($controller);
+$moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+
+if ($moduleNamespace == __NAMESPACE__) {
+	$viewModel = $event->getViewModel();
+	$viewModel->setTemplate('layout/layout');
+}
+$this->setUp();
+AbstractActionController::onDispatch($event);
+```
+jika controller atau actionnya tidak sesuai maka akan di lempar ke layout.
+
+### SIMPAN TABEL SESSION
+```bash
+// module/application/controller/ParentController.php method __saveSession
+Session::save($this->session);
+```
+Ok, proses akhir di atas dari aktivitas pada session kita akan simpan ke dalam tabel session.
+
+```bash
+TESTSESSION=18038305065e5cacce891115e5cacce89114
+```
+cookie tersebut sebagai kunci access untuk melakukan aktivitas pada web.
+
+```bash
+// module/application/controller/ParentController.php method __initSession
+$session_data = null;
+$session_data = Session::get($_COOKIE["TESTSESSION"]);
+
+$this->session = $session_data;
+```
+jika sesuai, maka aktivitas session sebelumnya di kembalikan sesuai aktivitas akhir yang di lakukan.
+
+Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://gitlab.com/maulana20/zf3-table-session) tersebut.
