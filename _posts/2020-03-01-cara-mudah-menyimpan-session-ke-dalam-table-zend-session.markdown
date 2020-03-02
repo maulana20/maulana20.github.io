@@ -24,16 +24,98 @@ composer install
 ```
 package library kemudian akan di download. Jika sudah, import database ke mysql atau phpmyadmin dengan sql pada folder database/zend_session.sql .
 
-Kemudah jalankan localhost server
+Kemudah jalankan PHP web server
 ```bash
 php -S 0.0.0.0:4000 -t public public/index.php
 ```
 
+Route yang di gunakan adalah :
+- http://localhost:4000/admin/login
+- http://localhost:4000/admin/logout
+- http://localhost:4000/user/list
+
 Buka postman dan jalankan
 ![login](https://gitlab.com/maulana20/zf3-table-session/-/raw/master/image/login.PNG)
+
+Buka halaman http://localhost:4000/user/list
+
+isi cookie TESTSESSION=18038305065e5cacce891115e5cacce89114 sesuai response login
 ![user](https://gitlab.com/maulana20/zf3-table-session/-/raw/master/image/user.PNG)
 
 jika tanpa login
 ![user](https://gitlab.com/maulana20/zf3-table-session/-/raw/master/image/nouser.PNG)
 
-dari gambar diatas
+dari gambar diatas ada 3 proses yang di jalankan :
+- authentication
+- authorization
+- session
+
+### 1. Authentication
+Pada saat login kita memasukan user dan password dengan admin, dimana dengan mengecek user admin pada database.
+
+library require yang di gunakan pada composer.json
+```bash
+"zendframework/zend-db": "^2.10"
+```
+
+Ok, kita lewati tutorial dari [https://docs.zendframework.com](https://docs.zendframework.com) , disini mengkoneksikan database terdapat konfigurasi dengan penggabungan <b>Zend TableGateway</b> dan <b>Zend Adapter</b>.
+
+lihat pada Table_Gateway_Adapter.php
+```html
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
+
+$adapter = new Adapter([
+	'hostname'	=> 'localhost',
+	'driver'	=> 'mysqli',
+	'database'	=> 'zend_session',
+	'username'	=> 'root',
+	'password'	=> 'gakpakai',
+]);
+
+new TableGateway($table, $adapter);
+```
+apa itu <b>TableGateway</b> ? yaitu object yang bertindak untuk action di dalam tabel.
+
+untuk cek login kita gunakan pada model user apakah user dan passwordnya sudah sesuai 
+```bash
+$user->isUserPassword($post['user'], $post['password']);
+```
+di sini tabel user terhubung dengan tabel group dengan beberapa access role, penjelasan lebih lanjut ada pada step berikutnya.
+
+### 2. Authorization
+Setelah login access role akan di setting sesuai group pada user tersebut. Setting role tersebut kita gunakan <b>Zend Acl</b>.
+
+library require yang di gunakan pada composer.json
+```bash
+"zendframework/zend-permissions-acl": "^2.7"
+```
+apa itu <b>Zend Acl</b> ? yaitu penentuan menu apa saja yang bisa di jalankan pada user tersebut.
+
+```html
+use Zend\Permissions\Acl\Acl;
+
+AdminController.php method login
+
+$access = $group->getAccess($group_id); // access pada group
+$access = unserialize($access);
+$this->setRole($access);
+
+ParentController.php method setRole
+
+$group = new Group();
+$acl = new Acl();
+$access_all = $group->getAccessAll(); // access pada profile (seluruh access)
+
+foreach ($access_all as $a) {
+	$acl->addRole(new Role($a));
+}
+foreach ($allow as $a) {
+	$acl->allow($a);
+}
+
+$this->session->acl = serialize($acl);
+```
+seluruh acl akan di simpan ke dalam session, penjelasan lebih lanjut ada pada step berikutnya.
+### 2. Session
+test
