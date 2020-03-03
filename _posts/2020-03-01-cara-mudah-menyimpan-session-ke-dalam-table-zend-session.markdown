@@ -141,7 +141,7 @@ public $session = NULL;
 // method setUp
 $this->session = new Container('namespace');
 
-// module/application/controller/ParentController.php action login
+// module/administration/controller/AdminController.php action login
 $this->session->user_id = $user_id;
 $this->session->user_name = $row['user_name'];
 $this->session->group_id = $group_id;
