@@ -30,37 +30,49 @@ php -S 0.0.0.0:4000 -t public public/index.php
 ```
 
 Route yang di gunakan adalah :
-- http://localhost:4000/admin/login
-- http://localhost:4000/admin/logout
-- http://localhost:4000/user/list
+- domain/admin/login
+- domain/admin/logout
+- domain/user/list
 
 Buka postman dan jalankan
+
 ![login](https://gitlab.com/maulana20/zf3-table-session/-/raw/master/image/login.PNG)
+{: style="text-align: center;"}
+Gambar I.
+{: style="color:gray; font-size: 90%; text-align: center;"}
 
-Buka halaman http://localhost:4000/user/list
+Buka halaman domain/user/list .
 
-isi cookie TESTSESSION=18038305065e5cacce891115e5cacce89114 sesuai response login
+Isilah cookie dengan data TESTSESSION=18038305065e5cacce891115e5cacce89114 sesuai response pada login.
+
 ![user](https://gitlab.com/maulana20/zf3-table-session/-/raw/master/image/user.PNG)
+{: style="text-align: center;"}
+Gambar II.
+{: style="color:gray; font-size: 90%; text-align: center;"}
 
-jika tanpa login
+Jika tanpa login akan muncul seperti berikut.
+
 ![user](https://gitlab.com/maulana20/zf3-table-session/-/raw/master/image/nouser.PNG)
+{: style="text-align: center;"}
+Gambar III.
+{: style="color:gray; font-size: 90%; text-align: center;"}
 
-dari gambar diatas ada 3 proses yang di jalankan :
-- authentication
-- authorization
-- session
+Dari gambar diatas ada 3 proses yang di jalankan :
+- <b>Authentication</b>
+- <b>Authorization</b>
+- <b>Session</b>
 
 ### 1. Authentication
 Pada saat login kita memasukan user dan password dengan admin, dimana dengan mengecek user admin pada database.
 
-library yang di gunakan pada composer.json
+Library yang di butuhkan.
 ```bash
 "zendframework/zend-db": "^2.10"
 ```
 
 Ok, kita lewati tutorial dari [https://docs.zendframework.com](https://docs.zendframework.com) , disini mengkoneksikan database terdapat konfigurasi dengan penggabungan <b>Zend TableGateway</b> dan <b>Zend Adapter</b>.
 
-lihat pada module/application/model/Table_Gateway_Adapter.php
+Lihat pada module/application/model/Table_Gateway_Adapter.php .
 ```html
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter;
@@ -75,22 +87,22 @@ $adapter = new Adapter([
 
 new TableGateway($table, $adapter);
 ```
-apa itu <b>TableGateway</b> ? yaitu object yang bertindak untuk action di dalam tabel.
+Apa itu <b>TableGateway</b> ? yaitu object yang bertindak untuk action di dalam tabel.
 
-untuk cek login kita gunakan pada model user apakah user dan passwordnya sudah sesuai 
+Untuk cek login kita gunakan pada model user apakah user dan passwordnya sudah sesuai.
 ```bash
 $user->isUserPassword($post['user'], $post['password']);
 ```
-di sini tabel user terhubung dengan tabel group dengan beberapa access role, penjelasan lebih lanjut ada pada step berikutnya.
+Di sini tabel user terhubung dengan tabel group dengan beberapa access role, penjelasan lebih lanjut ada pada step berikutnya.
 
 ### 2. Authorization
 Setelah login access role akan di setting sesuai group pada user tersebut. Role tersebut kita gunakan <b>Zend Acl</b>.
 
-library yang di butuhkan pada composer.json
+Library yang di butuhkan.
 ```bash
 "zendframework/zend-permissions-acl": "^2.7"
 ```
-apa itu <b>Zend Acl</b> ? yaitu penentuan menu apa saja yang bisa di jalankan pada user tersebut.
+Apa itu <b>Zend Acl</b> ? yaitu penentuan menu apa saja yang bisa di jalankan pada user tersebut.
 
 ```html
 use Zend\Permissions\Acl\Acl;
@@ -115,23 +127,23 @@ foreach ($allow as $a) {
 
 $this->session->acl = serialize($acl);
 ```
-seluruh acl sudah di bentuk, contoh role access menu :
+Seluruh acl sudah di bentuk, contoh role access menu :
 ```html
 // module/administration/controller/UserController.php action list
 $this->checkRole('ADMINISTRATION');
 $this->checkRole('USER');
 ```
-jika tidak ada akses, maka proses tidak akan dilanjutkan. Lihat pada module/application/controller/ParentController.php action checkRole
+Jika tidak ada akses, maka proses tidak akan dilanjutkan. Lihat pada module/application/controller/ParentController.php action checkRole.
 
-untuk acl di simpan ke dalam session, penjelasan lebih lanjut ada pada step berikutnya.
+Untuk acl di simpan ke dalam session, penjelasan lebih lanjut ada pada step berikutnya.
 ### 3. Session
 Session disini menggunakan <b>Zend Session</b>. Apa itu Zend Session ? yaitu seluruh aktivitas yang berhubungan dengan interaksi user pada sebuah web yang tersimpan di browser.
 
-library yang di butuhkan pada composer.json
+Library yang di butuhkan.
 ```bash
 "zendframework/zend-session": "^2.8"
 ```
-setelah login, seluruh aktivitas untuk kebutuhan web di simpan ke dalam session pada browser untuk di panggil kembali.
+Setelah login, seluruh aktivitas untuk kebutuhan web di simpan ke dalam session pada browser untuk di panggil kembali.
 ```html
 // module/application/controller/ParentController.php
 use Zend\Session\Container;
@@ -160,7 +172,7 @@ if ($moduleNamespace == __NAMESPACE__) {
 $this->setUp();
 AbstractActionController::onDispatch($event);
 ```
-jika controller atau actionnya tidak sesuai maka akan di lempar ke layout.
+Jika controller atau actionnya tidak sesuai maka akan di lempar ke layout.
 
 ### SIMPAN TABEL SESSION
 ```bash
@@ -172,7 +184,7 @@ Ok, proses akhir di atas dari aktivitas pada session kita akan simpan ke dalam t
 ```bash
 TESTSESSION=18038305065e5cacce891115e5cacce89114
 ```
-cookie tersebut sebagai kunci access untuk melakukan aktivitas pada web.
+Cookie tersebut sebagai kunci access untuk melakukan aktivitas pada web.
 
 ```bash
 // module/application/controller/ParentController.php method __initSession
@@ -181,6 +193,6 @@ $session_data = Session::get($_COOKIE["TESTSESSION"]);
 
 $this->session = $session_data;
 ```
-jika sesuai, maka aktivitas session sebelumnya di kembalikan sesuai aktivitas akhir yang di lakukan.
+Jika sesuai, maka aktivitas session sebelumnya di kembalikan sesuai aktivitas akhir yang di lakukan.
 
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://gitlab.com/maulana20/zf3-table-session) tersebut.

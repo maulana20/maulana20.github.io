@@ -5,37 +5,36 @@ github: https://gitlab.com/maulana20/redis-demo
 image: https://gitlab.com/maulana20/redis-demo/-/raw/master/image/redis-cli.PNG
 language: php
 ---
-Apa itu <b>redis</b> ? yaitu salah satu database dari dunia NoSQL yang berbasis key-value store di tempatkan di dalam memori. Redis lebih sekedar cache, karena bersifat sementara apabila di running ulang redis servernya data akan hilang kembali.
+Apa itu <b>redis</b> ? yaitu salah satu database dari dunia NoSQL yang berbasis key-value store di tempatkan di dalam memori. Redis memiliki sejumlah query yang pastinya mudah untuk digunakan untuk menyimpan mulai data sederhana hingga data kompleks.
 
-Ambil repo pada [link](https://gitlab.com/maulana20/redis-demo) tersebut.
-
-Kemudian ambil package yang dibutuhkan pada library
+Kita lanjut untuk mencoba redis. Sekarang ambil repo pada [link](https://gitlab.com/maulana20/redis-demo) tersebut. Kemudian ambil library yang di butuhkan dengan composer.
 ```bash
 composer install
 ```
 
-Package yang di butuhkan
+Library yang di butuhkan.
 ```bash
 "predis/predis": "^1.1"
 ```
 
-Kemudian download redis for windows [link](https://github.com/dmajkic/redis/downloads). Disini yang kita butuhkan ada 2 yaitu :
-- redis-server.exe
-- redis-cli.exe
+Kemudian download redis exe for windows [link](https://github.com/dmajkic/redis/downloads). Disini yang kita butuhkan ada 2 yaitu :
+- <b>redis-server.exe</b>
+- <b>redis-cli.exe</b>
 
-OK, untuk menjalankan redis kita jalankan redis-serve.exe
-![redis](https://gitlab.com/maulana20/redis-demo/-/raw/master/image/redis.PNG)
+OK, sekarang kita harus menjalankan redis server terlebih dahulu pada redis-serve.exe .
+![redis](https://gitlab.com/maulana20/redis-demo/-/raw/master/image/redis.PNG){: .center-image }
 
-Kemudian jalankan script php seperti berikut
-```bash
-php run.php
-```
+Gambar I.
+{: style="color:gray; font-size: 90%; text-align: center;"}
 
-Maka akan tampil seperti berikut
+Kemudian jalankan script php seperti berikut.
 
 ![run](https://gitlab.com/maulana20/redis-demo/-/raw/master/image/run.PNG)
+{: style="text-align: center;"}
+Gambar II.
+{: style="color:gray; font-size: 90%; text-align: center;"}
 
-lihat pada run.php
+Lihat pada run.php .
 ```html
 require_once 'vendor/autoload.php';
 
@@ -46,8 +45,15 @@ $redis = new Client();
 $redis->set('nama', 'maulana saputra'); // nb : set key => value
 echo $redis->get('nama');
 ```
-terdapat autoload.php yang merupakan penghubung library yang sudah kita download pada composer (PSR-4 Autoloading).
+Terdapat file <b>autoload.php</b> yang merupakan (PSR-4 Autoloading) pada composer sebagai <b>penghubung</b> <b>library</b> yang ada pada folder vendor. Data dengan key dan value telah dikirimkan ke redis server (lihat pada Gambar I) dan lihat pada redis akan muncul keterangan Accepted 127.0.0.1:55529 .
 
-jika di jalankan melalui redis-cli.exe
+Jika di jalankan melalui redis-cli.exe .
 
 ![redis-cli](https://gitlab.com/maulana20/redis-demo/-/raw/master/image/redis-cli.PNG)
+{: style="text-align: center;"}
+Gambar III.
+{: style="color:gray; font-size: 90%; text-align: center;"}
+
+Bisa kita cek <b>query</b> <b>redis</b> pada <b>command</b> dengan perintah di atas. Data tersebut bersifat sementara apabila redis-server di jalankan ulang, maka data di kembalikan ke semula.
+
+Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://gitlab.com/maulana20/redis-demo) tersebut.

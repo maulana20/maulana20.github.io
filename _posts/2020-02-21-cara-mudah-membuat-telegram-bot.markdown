@@ -33,7 +33,7 @@ Package    Version
 pip        10.0.1
 setuptools 39.0.1
 ```
-apa itu <b>pip</b> ? yaitu manajemen paket pada python.
+Apa itu <b>pip</b> ? yaitu manajemen paket pada python.
 
 API pada telegram menggunakan metode HTTP POST GET maka kita akan mengambil paket requests untuk menjalankan HTTP URL untuk melakukan request dan response.
 ```bash
@@ -75,7 +75,7 @@ jalankan dengan
 ```bash
 py run.py
 ```
-maka <b>last_update</b> menghasilkan parsing data json dalam bentuk array dari hasil API, jika sebelumnya sudah pernah mengirim pesan pada bot maka akan ada response <b>chat_id</b> dari siapa yang mengirim pesan tersebut. Kalian bisa mengirimkan pesan pada chat_id tersebut, lalu pesan kembali akan terkirim kepada pengirim pesan.
+Maka <b>last_update</b> menghasilkan parsing data json dalam bentuk array dari hasil API, jika sebelumnya sudah pernah mengirim pesan pada bot maka akan ada response <b>chat_id</b> dari siapa yang mengirim pesan tersebut. Kalian bisa mengirimkan pesan pada chat_id tersebut, lalu pesan kembali akan terkirim kepada pengirim pesan.
 
 Lakukan hingga bisa melakukan interaksi dengan bot seperti berikut.
 
