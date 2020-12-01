@@ -68,7 +68,7 @@ class ContactUsMail extends Mailable
 Pada langkah ini untuk menulis email yang akan kita kirimkan.
 
 Kemudian pada resources\views\mail\contact-us-mail.blade.php
-```html
+```bash
 <!DOCTYPE html>
 <html>
 <head>
