@@ -125,12 +125,14 @@ DEVELMAIL
 ```html
 MAIL_HOST=smtp.develmail.com
 MAIL_PORT=587
+MAIL_ENCRYPTION=
 ```
 
 SENDGRID
 ```html
 MAIL_HOST=smtp.sendgrid.net
 MAIL_PORT=587
+MAIL_ENCRYPTION=
 ```
 
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://www.itsolutionstuff.com/post/how-to-send-mail-in-laravel-6example.html) tersebut.
