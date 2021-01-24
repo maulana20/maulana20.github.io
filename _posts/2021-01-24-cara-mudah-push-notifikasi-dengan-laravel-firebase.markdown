@@ -61,7 +61,7 @@ messaging.onMessage(function(payload) {
 ```
 
 Lalu kita panggil pada home.
-```html
+```script
 <script src="{{ asset('js/firebase.js') }}" defer></script>
 ```
 
@@ -129,7 +129,7 @@ Route::post('firebase/send-notification', 'FirebaseController@sendNotification')
 
 ### 4. Membuat Form
 Pada langkah ini kita akan membuat form.blade.php untuk mengetes pada push notification.
-```bash
+```script
 @extends('layouts.app')
 
 @section('title', 'Form Push Notification')
