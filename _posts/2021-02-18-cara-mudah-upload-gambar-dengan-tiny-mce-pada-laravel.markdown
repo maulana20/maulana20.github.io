@@ -32,7 +32,7 @@ Kemudian tambahkan script.
             let data = new FormData();
             data.append('file', blobInfo.blob(), blobInfo.filename());
             data.append('_token', document.getElementsByName("_token")[0].value);
-            axios.post("<?= url('admin/announcement/upload'); ?>", data).then(function (res) {
+            axios.post("/file/upload", data).then(function (res) {
                 success(res.data.location);
             }).catch(function (err) {
                 failure('HTTP Error: ' + err.message);
