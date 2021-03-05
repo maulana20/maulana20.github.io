@@ -110,4 +110,16 @@ Pada upload di storage jika kita gunakan default tanpa nama file bisa gunakan :
 $location = $request->file->storePublicly('upload-image', 'public');
 ```
 
+Jika ingin disabled pada tiny bisa lakukan seperti di bawah ini.
+```bash
+tinyMCE.init({
+    selector: '#form-content-readonly',
+    readonly : 1
+});
+```
+
+```bash
+tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+```
+
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://kevinchoppin.dev/blog/implementing-simple-file-uploads-in-tinymce-editor) tersebut.
