@@ -21,7 +21,7 @@ npm install
 ```
 
 ### 2. Membuat Component
-Pada langkah ini kita akan membuat component baru pada resources\js\components\Attachment.vue .
+Pada langkah ini kita akan membuat contoh component baru pada resources\js\components\Attachment.vue .
 ```bash
 <template>
     <div>
@@ -97,9 +97,7 @@ npm run prod
 
 ### Catatan
 - Jika component yang kita buat tidak tampil, pastikan pada layout dalam body di panggil id app nya.
-```bash
-<div id="app" class="wrapper">
-```
-- Jika styling mengalami perubahan, pastikan pada resources\sass\* kalian kembalikan ke semula dan jika terdapat plugin pada resources\js\app.js sebelumnya .. kalian bisa kembalikan plugin tersebut cukup bagian require nya saja.
+- Jika styling mengalami perubahan, pastikan pada resources\sass\* kalian kembalikan ke semula.
+- Jika terdapat plugin pada resources\js\app.js sebelumnya, kalian bisa kembalikan plugin tersebut cukup bagian require nya saja.
 
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://www.techiediaries.com/laravel/how-to-install-vuejs-in-laravel-6-7-by-example/) tersebut.
