@@ -7,11 +7,12 @@ language: vue | Laravel
 ---
 
 ### 1. Menginstall Depedency
+Di sini kita perlu menginstall depedency pada laravel untuk menghubungkan dengan ui Vue nantinya.
 ```bash
 composer require laravel/ui
 ```
 
-Vue
+Kemudian install Vue.
 ```bash
 php artisan ui vue
 ```
@@ -21,7 +22,7 @@ npm install
 ```
 
 ### 2. Membuat Component
-Pada langkah ini kita akan membuat contoh component baru pada resources\js\components\Attachment.vue .
+Pada langkah ini kita akan membuat contoh component baru pada `resources\js\components\Attachment.vue`.
 ```bash
 <template>
     <div>
@@ -74,7 +75,7 @@ Pada langkah ini kita akan membuat contoh component baru pada resources\js\compo
 </script>
 ```
 
-Tambahkan component yang telah kita buat pada resources\js\app.js .
+Tambahkan component yang telah kita buat pada `resources\js\app.js`.
 ```bash
 Vue.component('attachment', require('./components/Attachment.vue').default);
 ```
@@ -96,8 +97,8 @@ npm run prod
 ```
 
 ### Catatan
-- Jika component yang kita buat tidak tampil, pastikan pada layout dalam body di panggil id app nya.
-- Jika styling mengalami perubahan, pastikan pada resources\sass\* kalian kembalikan ke semula.
-- Jika terdapat plugin pada resources\js\app.js sebelumnya, kalian bisa kembalikan plugin tersebut cukup bagian require nya saja.
+- Jika component yang kita buat tidak tampil, pastikan pada layout dalam body di panggil id `app` nya.
+- Jika styling mengalami perubahan, pastikan pada `resources\sass\*` kalian kembalikan ke semula.
+- Jika terdapat plugin pada `resources\js\app.js` sebelumnya, kalian bisa kembalikan plugin tersebut cukup bagian require nya saja.
 
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://www.techiediaries.com/laravel/how-to-install-vuejs-in-laravel-6-7-by-example/) tersebut.
