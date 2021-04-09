@@ -7,6 +7,7 @@ language: php | Laravel
 ---
 
 Perlu di perhatikan pada saat lihat route list sudah di sediakan route untuk reset password.
+
 `$ php artisan route:list`
 ```bash
 |        | POST      | password/email         | password.email    | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest  |
@@ -68,7 +69,7 @@ class ForgotPasswordController extends Controller
 note : pada `App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm` merupakan form input email pada view.
 
 Membuat form reset password untuk mengubah password.
-`App\Http\Controllers\Auth\ForgotPasswordController`.
+`App\Http\Controllers\Auth\ForgotPasswordController.php`.
 ```bash
 <?php
 
