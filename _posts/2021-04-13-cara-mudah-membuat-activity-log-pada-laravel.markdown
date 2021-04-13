@@ -8,13 +8,15 @@ language: php
 
 ### 1. Menambahkan Depedency
 Di sini kita perlu menginstall depedency dengan menjalankan perintah.
-`$ composer require spatie/laravel-activitylog`
-`$ php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"`
-`$ php artisan migrate`
-`$ php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="config"`
+```bash
+$ composer require spatie/laravel-activitylog
+$ php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"
+$ php artisan migrate
+$ php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="config"
+```
 
 ### 2. Menambahkan LogsActivity Pada Model
-`
+```bash
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Models\Activity;
 
@@ -52,11 +54,11 @@ class Announcement extends Model
         }
     }
 }
-`
+```
 note : pada `getDescriptionForEvent` merupakan custom pada description berdasarkan event nya, `tapActivity` merupakan kebutuhan jika ada tambahan pada properties.
 
 ### 2. Menampilkan Activity Pada Controller
-`
+```bash
 use Spatie\Activitylog\Models\Activity;
 
     public function edit(Announcement $announcement)
@@ -65,6 +67,6 @@ use Spatie\Activitylog\Models\Activity;
         
         //
     }
-`
+```
 
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://spatie.be/docs/laravel-activitylog/v3/installation-and-setup) tersebut.
