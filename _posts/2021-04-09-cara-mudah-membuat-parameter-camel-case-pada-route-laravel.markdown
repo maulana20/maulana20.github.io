@@ -3,7 +3,7 @@ layout: post
 title: Cara Mudah Membuat Parameter Camel Case Pada Route Laravel
 github: https://laravel.com/docs/6.x/controllers#restful-naming-resource-routes
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/CamelCase.svg/250px-CamelCase.svg.png
-language: php
+language: php | Laravel
 ---
 
 Pada `routes\web.php`

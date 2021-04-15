@@ -3,7 +3,7 @@ layout: post
 title: Cara Mudah Membuat Activity Log Pada Laravel
 github: https://spatie.be/docs/laravel-activitylog/v3/installation-and-setup
 image: https://www.tutsmake.com/wp-content/uploads/2020/11/Laravel-8-User-Activity-Log.jpg
-language: php
+language: php | Laravel
 ---
 
 ### 1. Menambahkan Depedency
