@@ -21,8 +21,8 @@ flutter pub get
 ```bash
 SharedPreferences preferences = await SharedPreferences.getInstance();
 
-preferences.setString('${index}', '${value}');
-preferences.getString(index);
+preferences.setString('nama', 'maulana');
+preferences.getString('nama');
 ```
 
 #### Contoh
