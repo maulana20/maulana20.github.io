@@ -19,21 +19,13 @@ flutter pub get
 
 ### 2. Membuat Fungsi Pada Preference
 ```bash
-    Future<String> setPreference(String index, String value) async {
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        setState(() { preferences.setString('${index}', '${value}'); });
-    }
-    
-    Future<String> getPreference(String index) async {
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        return preferences.getString(index);
-    }
+SharedPreferences preferences = await SharedPreferences.getInstance();
+
+preferences.setString('${index}', '${value}');
+preferences.getString(index);
 ```
 
-#### Contoh 
-
-simpan nama dengan `await setPreference('nama', 'maulana');`, lalu panggil nama dengan `final nama = await getPreference('nama');`
-
+#### Contoh
 ```bash
 import 'dart:async';
 
