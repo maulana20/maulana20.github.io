@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cara Mudah Menyimpan Data Dalam Aplikasi Pada Laravel
+title: Cara Mudah Menyimpan Data Dalam Aplikasi Pada Flutter
 github: https://www.byriza.com/flutter-41-menyimpan-data-dengan-shared-preferences-pada-flutter
 image: https://miro.medium.com/max/700/1*d7_x3XnsC6FJXNHNx_seQg.png
 language: dart | flutter
