@@ -6,19 +6,25 @@ image: https://miro.medium.com/max/700/1*d7_x3XnsC6FJXNHNx_seQg.png
 language: dart | flutter
 ---
 
-### 1. Menambahkan Package Manager [PUB](https://pub.dev/packages/shared_preferences)
+### 1. Menambahkan Package Manager
+Pada `pubspec.yaml`
 ```bash
-import 'dart:async';
-import 'package:shared_preferences/shared_preferences.dart';
+dependencies:
+  flutter:
+    sdk: flutter
+  //
+  shared_preferences: ^0.5.2+2
 ```
 
-Jalankan
+Kemudian run
 ```bash
 flutter pub get
 ```
 
 ### 2. Membuat Fungsi Pada Preference
 ```bash
+import 'package:shared_preferences/shared_preferences.dart';
+
 SharedPreferences preferences = await SharedPreferences.getInstance();
 
 preferences.setString('nama', 'maulana');
