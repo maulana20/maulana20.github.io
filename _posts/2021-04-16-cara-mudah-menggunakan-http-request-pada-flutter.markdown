@@ -127,4 +127,13 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
+note : Apabila terjadi gagal request di karenakan not allow pada domain http <span style="color:red;">Bad state: Insecure HTTP is not allowed by platform</span>, maka tambahkan pada `android/app/src/main/AndroidManifest.xml`
+```bash
+<application
+        android:name="io.flutter.app.FlutterApplication"
+        android:label="receipt"
+        android:usesCleartextTraffic="true" <!-- This Line -->
+        android:icon="@mipmap/ic_launcher">
+```
+
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://medium.com/swlh/how-to-make-http-requests-in-flutter-d12e98ee1cef) tersebut.
