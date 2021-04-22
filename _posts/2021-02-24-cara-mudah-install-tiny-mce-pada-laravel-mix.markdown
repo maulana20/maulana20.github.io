@@ -13,7 +13,7 @@ npm install tinymce
 ```
 
 ### 2. Menambahkan Script Generate
-Pada langkah ini menambahkan script untuk generate app.js pada resources/assets/js/app.js.
+Pada langkah ini menambahkan script untuk generate app.js pada resources/js/app.js.
 ```bash
 require('tinymce');
 require('tinymce/themes/silver');
