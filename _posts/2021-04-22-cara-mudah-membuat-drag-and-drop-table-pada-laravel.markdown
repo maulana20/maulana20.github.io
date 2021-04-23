@@ -111,4 +111,30 @@ class PostController extends Controller
 Route::post('post/sort-update', 'PostController@sortUpdate', ['as' => 'admin'])->name('admin.post.sort-update');
 ```
 
+note : apabila ingin menambahkan edit order pada form edit, bisa kita tambahkan pada request.
+```bash
+public function syncOrder(Post $post)
+{
+    if ($post->order == $this->order) return false;
+    
+    $position = Post::where('order' , '<=', $post->order)->count();
+    
+    $postsByOrder = Post::order()->get();
+    
+    foreach ($postsByOrder as $index => $maintainedPost) {
+        $order = $index + 1;
+        
+        if ( ($order >= $this->order) && ($order <= $position) ) {
+            $maintainedPost->update([ 'order' => $order + 1 ]);
+        } elseif ( ($order >= $position) && ($order <= $this->order) ) {
+            $maintainedPost->update([ 'order' => $order - 1 ]);
+        } else {
+            $maintainedPost->update([ 'order' => $order ]);
+        }
+    }
+    
+    $post->update([ 'order' => $this->order ]);
+}
+```
+
 Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://www.nicesnippets.com/blog/laravel-6-drag-and-drop-datatable-rows-for-sorting-example) tersebut.
