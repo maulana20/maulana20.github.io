@@ -1,40 +1,35 @@
 ---
 layout: post
-title: Cara Mudah Menyimpan Data Dalam Aplikasi Pada Flutter
+title: Cara Mudah Menggunakan Shared Preferences Pada Flutter
 github: https://www.byriza.com/flutter-41-menyimpan-data-dengan-shared-preferences-pada-flutter
 image: https://miro.medium.com/max/700/1*d7_x3XnsC6FJXNHNx_seQg.png
 language: dart | flutter
 ---
 
-### 1. Menambahkan Package Manager
-Pada `pubspec.yaml`
+### 1. Install
+`pubspec.yaml`
 ```bash
 dependencies:
-  flutter:
-    sdk: flutter
-  //
   shared_preferences: ^0.5.2+2
 ```
-
-Kemudian run
+kemudian jalankan
 ```bash
 flutter pub get
 ```
 
-### 2. Membuat Fungsi Pada Preference
+### 2. Fungsi Pada Preferences
 ```bash
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences preferences = await SharedPreferences.getInstance();
 
-preferences.setString('nama', 'maulana');
-preferences.getString('nama');
+preferences.setString('test', 'String yang disimpan');
+preferences.getString('test');
 ```
 
 #### Contoh
+`lib/main.dart`
 ```bash
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,24 +44,14 @@ class _MyAppState extends State<MyApp> {
     _MyAppState({ this.appTitle });
     
     String appTitle;
-    String nama;
-    
-    Future<String> setPreference(String index, String value) async {
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        setState(() { preferences.setString('${index}', '${value}'); });
-    }
-    
-    Future<String> getPreference(String index) async {
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        return preferences.getString(index);
-    }
+    String test;
     
     initPreference() async {
-        await setPreference('nama', 'maulana');
-        nama = await getPreference('nama');
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        await preferences.setString('test', 'String yang disimpan');
+        setState(() { test = preferences.getString('test'); });
     }
     
-    @override
     void initState() {
         super.initState();
         initPreference();
@@ -75,13 +60,16 @@ class _MyAppState extends State<MyApp> {
     @override
     Widget build(BuildContext context) {
         return MaterialApp(
-            title: appTitle,
+            title: 'NavigationDrawer Demo',
+            theme: ThemeData(
+                primarySwatch: Colors.blue,
+            ),
             home: Scaffold(
                 appBar: AppBar(
                     title: Text(appTitle),
                 ),
                 body: Center(
-                    child: Text(nama),
+                    child: Text(test),
                 ),
             ),
         );
