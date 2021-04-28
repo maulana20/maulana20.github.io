@@ -6,6 +6,8 @@ image: https://miro.medium.com/max/700/1*d7_x3XnsC6FJXNHNx_seQg.png
 language: dart | flutter
 ---
 
+Memastikan possible untuk membuat salah satu opsi penyimpanan data sederhana seperti string, int, dan lain - lain ke dalam aplikasi.
+
 ### 1. Install
 `pubspec.yaml`
 ```bash

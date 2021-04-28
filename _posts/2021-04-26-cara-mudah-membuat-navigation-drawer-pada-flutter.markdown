@@ -6,6 +6,8 @@ image: https://miro.medium.com/max/540/1*EsZiL8weIycbTDMo2m49MA.png
 language: dart | flutter
 ---
 
+Memastikan possible untuk membuat side menu berupa panel navigasi yang menampilkan menu navigasi utama pada aplikasi kita.
+
 ### 1. Membuat Drawer
 #### Contoh
 susunan directory

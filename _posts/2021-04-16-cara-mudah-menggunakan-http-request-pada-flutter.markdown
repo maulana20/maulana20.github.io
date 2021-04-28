@@ -1,10 +1,12 @@
 ---
 layout: post
 title: Cara Mudah Menggunakan Http Request Pada Flutter
-github: https://medium.com/swlh/how-to-make-http-requests-in-flutter-d12e98ee1cef
-image: https://miro.medium.com/max/700/1*YcF4X4FFw-p59uFTiS8gQQ.png
+github: https://daengweb.id/belajar-flutter-basic-5-http-request
+image: https://daengweb.id/uploads/galeri/1/Flutter/basic-5/flutter_http_-_view-optimize.png
 language: dart | flutter
 ---
+
+Memastikan possible untuk mengirim atau mengambil data melalui http request meliputi get, post, patch, dan delete dengan tujuan dapat berinteraksi dengan backend.
 
 ### 1. Install
 `pubspec.yaml`
@@ -239,4 +241,4 @@ note : Apabila terjadi gagal request di karenakan not allow pada domain http <sp
         android:icon="@mipmap/ic_launcher">
 ```
 
-Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://medium.com/swlh/how-to-make-http-requests-in-flutter-d12e98ee1cef) tersebut.
+Sekian untuk kali ini semoga bermanfaat :D untuk lebih lanjut bisa kunjungi [link](https://daengweb.id/belajar-flutter-basic-5-http-request) tersebut.
