@@ -6,120 +6,223 @@ image: https://miro.medium.com/max/700/1*YcF4X4FFw-p59uFTiS8gQQ.png
 language: dart | flutter
 ---
 
-### 1. Menambahkan Package Manager
-Pada `pubspec.yaml`
+### 1. Install
+`pubspec.yaml`
 ```bash
 dependencies:
-  flutter:
-    sdk: flutter
-  //
   http: any
 ```
-
-Kemudian run
+kemudian jalankan
 ```bash
 flutter pub get
 ```
 
-### 2. Membuat Fungsi Pada Http
+### 2. Fungsi Pada Http
 ```bash
-
 import 'package:http/http.dart' as http;
 
 Map<String, String> headers = {'Content-Type': 'application/json'};
-http.Response response = await http.get('http://domain', headers: headers);
+http.Response response = await http.get('https://jsonplaceholder.typicode.com/posts', headers: headers);
 
-Map<String, dynamic> result = jsonDecode(response.body);
+Map<String, dynamic> result = json.decode(response.body);
 ```
 
 #### Contoh
+susunan directory
 ```bash
-import 'dart:async';
-import 'dart:convert';
+❏ lib
+    ❏ page
+        ❏ post_page.dart
+        ❏ post_detail_page.dart
+    ❏ model
+        ❏ post.dart
+    ❏ main.dart
+```
 
+`lib/main.dart`
+```bash
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:my_app/page/post_page.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-    @override
-    _MyAppState createState() => new _MyAppState(appTitle: 'Http Demo');
-}
-
-class _MyAppState extends State<MyApp> {
-    _MyAppState({ this.appTitle });
-    
-    String appTitle;
-    Map<String, dynamic> currencies;
-    
-    final JsonDecoder _decoder = new JsonDecoder();
-    
-    Future<Map> getCurrencies() async {
-        Map<String, String> headers = {'Content-Type': 'application/json'};
-        http.Response response = await http.get('http://www.floatrates.com/daily/idr.json', headers: headers);
-        
-        print('Response GET: ${response.body}');
-        Map<String, dynamic> result = jsonDecode(response.body);
-        
-        return result;
-    }
-    
-    initCurrencies() async {
-        currencies = await getCurrencies();
-    }
-    
-    @override
-    void initState() {
-        super.initState();
-        initCurrencies();
-    }
+class MyApp extends StatelessWidget {
+    final appTitle = 'Http Demo';
     
     @override
     Widget build(BuildContext context) {
         return MaterialApp(
             title: appTitle,
-            home: Scaffold(
-                appBar: AppBar(
-                    title: Text(appTitle),
+            theme: ThemeData(
+                primarySwatch: Colors.blue,
+            ),
+            home: PostPage(appTitle: appTitle),
+        );
+    }
+}
+```
+
+`lib/model/post.dart`
+```bash
+class Post extends Object {
+    int userId;
+    int id;
+    String title;
+    String body;
+    
+    Post({ this.userId, this.id, this.title, this.body });
+    
+    factory Post.fromJson(Map<String, dynamic> json) {
+        return Post(
+            userId: json['userId'],
+            id: json['id'],
+            title: json['title'],
+            body: json['body'],
+        );
+    }
+}
+```
+
+`lib/page/post_page.dart`
+```bash
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:my_app/model/post.dart';
+import 'package:my_app/page/post_detail_page.dart';
+
+import 'dart:async';
+import 'dart:convert';
+
+class PostPage extends StatefulWidget {
+    PostPage({ this.appTitle });
+    
+    String appTitle;
+    
+    @override
+    _PostPageState createState() => new _PostPageState(appTitle: appTitle);
+}
+
+class _PostPageState extends State<PostPage> {
+    _PostPageState({ this.appTitle });
+    
+    String appTitle;
+    List<Post> posts;
+    
+    void getList() async {
+        Map<String, String> headers = {'Content-Type': 'application/json'};
+        http.Response response = await http.get('https://jsonplaceholder.typicode.com/posts', headers: headers);
+        
+        final result = json.decode(response.body);
+        
+        setState(() { posts = result.map<Post>((json) => Post.fromJson(json)).toList(); });
+    }
+    
+    void initState() {
+        super.initState();
+        getList();
+    }
+    
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(
+                title: Text(appTitle),
+            ),
+            body: Container(
+                margin: EdgeInsets.all(10.0),
+                child: ListView.builder(
+                    itemCount: posts == null ? 0 : posts.length,
+                    itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                            child: Card(
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.min, children: <Widget>[
+                                        ListTile(
+                                            title: Text(
+                                                posts[index].title,
+                                                maxLines: 2,
+                                            ),
+                                            subtitle: Text(
+                                                posts[index].body,
+                                                textAlign: TextAlign.justify,
+                                                maxLines: 2,
+                                            ),
+                                        ),
+                                        ButtonTheme.bar(
+                                            child: ButtonBar(
+                                                children: <Widget>[
+                                                    FlatButton(
+                                                        child: const Text('LIHAT DETAIL'),
+                                                        onPressed: () {
+                                                            Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(builder: (context) => PostDetailPage(post: posts[index])),
+                                                            );
+                                                        },
+                                                    ),
+                                                ],
+                                            ),
+                                        ),
+                                    ],
+                                ),
+                            ),
+                        );
+                    }
                 ),
-                body: !["", null, false, 0].contains(currencies) ? dataResult() : errorResult(),
             ),
         );
     }
+}
+```
+
+`lib/page/post_detail_page.dart`
+```bash
+import 'package:flutter/material.dart';
+import 'package:my_app/model/post.dart';
+
+class PostDetailPage extends StatelessWidget {
+    PostDetailPage({ this.post });
     
-    Widget errorResult() {
-        return Center(
-            child: new Text('Data not load, please press r [Hot reload] !'),
-        );
-    }
+    final Post post;
     
-    Widget dataResult() {
-        return ListView(
-            children: <Widget> [
-                CurrencyTile('USD', 'IDR', currencies['usd']),
-                CurrencyTile('JPY', 'IDR', currencies['jpy']),
-                CurrencyTile('MYR', 'IDR', currencies['myr']),
-            ],
-        );
-    }
-    
-    ListTile CurrencyTile(String from, String to, dynamic currency) {
-        return ListTile(
-            title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                    Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                            Text(from),
-                            SizedBox(width: 5.0),
-                            Icon(Icons.arrow_forward_outlined, size: 14.0),
-                            SizedBox(width: 5.0),
-                            Text(to),
-                        ],
+    @override
+    Widget build(BuildContext context) {
+        final appTitle = 'Post Detail ${post.id}';
+        return Scaffold(
+            appBar: AppBar(
+                title: Text(appTitle),
+            ),
+            body: ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.all(10.0),
+                children: <Widget>[
+                    TextFormField(
+                        enabled: false,
+                        initialValue: '${post.userId}',
+                        decoration: InputDecoration(
+                            labelText: 'User ID',
+                            contentPadding: EdgeInsets.all(10.0),
+                        ),
                     ),
-                    Text('${currency['inverseRate']}')
+                    TextFormField(
+                        enabled: false,
+                        initialValue: post.title,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 3,
+                        decoration: InputDecoration(
+                            labelText: 'Title',
+                            contentPadding: EdgeInsets.all(10.0),
+                        ),
+                    ),
+                    TextFormField(
+                        enabled: false,
+                        initialValue: post.body,
+                        maxLines: 8,
+                        decoration: InputDecoration(
+                            labelText: 'Body',
+                            contentPadding: EdgeInsets.all(10.0),
+                        ),
+                    ),
                 ],
             ),
         );
