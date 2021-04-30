@@ -15,9 +15,9 @@ susunan directory
 ❏ lib
     ❏ page
         ❏ train_page.dart
-    ❏ components
-        ❏ station_widget.dart
-        ❏ station_search_delegate.dart
+        ❏ components
+            ❏ station_widget.dart
+            ❏ station_search_delegate.dart
     ❏ model
         ❏ station.dart
         ❏ station_lookup.dart
