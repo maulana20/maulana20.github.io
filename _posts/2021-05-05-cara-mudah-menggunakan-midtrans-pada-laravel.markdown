@@ -14,7 +14,7 @@ Di sini kita perlu menginstall depedency pada composer.
 composer require veritrans/veritrans-php
 ```
 
-### 2. Menambahkan Script pada Controller
+### 2. Membuat Script pada Controller
 ```bash
 <?php
 
