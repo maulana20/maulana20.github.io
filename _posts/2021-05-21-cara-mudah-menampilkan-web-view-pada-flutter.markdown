@@ -30,26 +30,26 @@ import 'dart:async';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Web Views',
-      theme: ThemeData(
-          primarySwatch: Colors.blue,
-          fontFamily: "Arial",
-          textTheme: TextTheme(
-              button: TextStyle(color: Colors.white, fontSize: 18.0),
-              title: TextStyle(color: Colors.red))),
-      home: MyHomePage(),
-    );
-  }
+    @override
+    Widget build(BuildContext context) {
+        return MaterialApp(
+            title: 'Flutter Web Views',
+            theme: ThemeData(
+            primarySwatch: Colors.blue,
+            fontFamily: "Arial",
+            textTheme: TextTheme(
+                button: TextStyle(color: Colors.white, fontSize: 18.0),
+                title: TextStyle(color: Colors.red))),
+            home: MyHomePage(),
+        );
+    }
 }
 
 class MyHomePage extends StatefulWidget {
-  String url = "https://gentle-river-19491.herokuapp.com";
+    String url = "https://gentle-river-19491.herokuapp.com";
 
-  @override
-  createState() => _MyHomePageState(this.url);
+    @override
+    createState() => _MyHomePageState(this.url);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
