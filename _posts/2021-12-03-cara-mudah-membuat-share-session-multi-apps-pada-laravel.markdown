@@ -43,16 +43,17 @@ Memungkinkan untuk melakukan share session, cookie pada multi aplikasi pada subd
     ],
 ```
 
-#### Ubah Pada Models\User.php
+#### Tambahkan Pada Models\User.php
 `protected $connection = 'common_database';`
 
 #### Ubah Environtment
-- `APP_KEY="copy pada APP_KEY applikasi pertama"`
+- `APP_KEY="copy pada APP_KEY aplikasi pertama"`
+- `COMMON_DB_DATABASE="nama database pada aplikasi pertama"`
 - `SESSION_DRIVER=database`
 - `SESSION_CONNECTION=common_database`
 - `SESSION_DOMAIN=".example.com"`
 
-#### Ubah Middleware\Authenticate.php
+#### Tambahkan Pada Middleware\Authenticate.php
 ```bash
     use Session;
     
