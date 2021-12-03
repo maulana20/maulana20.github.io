@@ -6,6 +6,7 @@ scp -i key.pem file user@host:location_path => upload
 
 ### Git
 ```bash
+git fetch
 git branch
 git diff
 git checkout feature/update_content
@@ -21,7 +22,7 @@ sudo chown -R $USER:www-data {directory}
 sudo chmod -R 775 {directory}
 ```
 
-### Install Package Other Php
+### Install Package Other PHP
 ```bash
 /usr/bin/php7.3 /usr/local/bin/composer install
 ```
@@ -50,7 +51,13 @@ composer dump-autoload
 
 ### Update Package
 ```bash
+composer update => note : for all
 composer update facade/ignition
+```
+
+### Certificate Update
+```bash
+git config --global http.sslVerify false
 ```
 
 ### Cek Log
