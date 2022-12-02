@@ -14,6 +14,9 @@ git checkout -p public/js/app.js => revert
 git pull origin release/1.0.0
 git reset --hard => note : revert all
 git reset --hard origin/develop
+git filter-branch --index-filter 'git rm -rf --cached --ignore-unmatch backend/xxx.json' feature/xxx => remove file and history
+git reset --hard [commitId]
+git push --force
 ```
 
 ### Permission Storage
