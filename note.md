@@ -17,6 +17,8 @@ git reset --hard origin/develop
 git filter-branch --index-filter 'git rm -rf --cached --ignore-unmatch backend/xxx.json' feature/xxx => remove file and history
 git reset --hard [commitId]
 git push --force
+git add [pathFile]
+git commit --amend --no-edit
 ```
 
 ### Permission Storage
