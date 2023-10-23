@@ -68,3 +68,4 @@ git config --global http.sslVerify false
 /var/log/nginx
 sudo tail error.log
 ```
+percobaan
