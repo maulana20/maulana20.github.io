@@ -34,6 +34,13 @@ $query->when(true, fn ($query, $search) {
     });
 });
 ```
+sample filter
+```bash
+// GET /users?filter[name]=john&filter[email]=gmail
+$users = QueryBuilder::for(User::class)
+    ->allowedFilters(['name', 'email'])
+    ->get();
+```
 umum
 ```bash
 $query->latest('updated_at')->get() // latest, oldest
@@ -78,3 +85,5 @@ protected $casts = [ 'images' => 'array' ];
 ```
 [custom](https://github.com/LaravelDaily/laravel-tips/blob/master/db-models-and-eloquent.md#custom-casts)
 ​
+https://stackoverflow.com/questions/18236294/how-do-i-get-the-query-builder-to-output-its-raw-sql-query-as-a-string
+https://stackoverflow.com/questions/25320335/eloquent-update-failing-due-to-updated-at-table-ambiguity

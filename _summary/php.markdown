@@ -23,9 +23,14 @@ declare variable pada array
 ​```
 
 #### umum
+
+shorthand kondisi if > elseif > else
+```bash
+$name = $_GET['name'] ?? $_POST['name'] ?? 'nobody';
+```
+
 ```bash
 sprintf('id in ("%s") and category in ("%s")', $ids, $categories);
-$name = $_GET['name'] ?? $_POST['name'] ?? 'nobody'; // if > elseif > else
 ```
 
 #### konfigurasi manual
@@ -45,7 +50,9 @@ foreach ($result as $value) {
     }
 }
 ​```
+
 sample function konfigurasi array
+
 ```bash
 function config(): array
 {
