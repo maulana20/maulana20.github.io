@@ -70,3 +70,12 @@ git config --global http.sslVerify false
 /var/log/nginx
 sudo tail error.log
 ```
+
+### Redis
+```bash
+cli > KEYS *
+cli > KEYS tus:*
+cli > GET tus:xxx
+cli > FLUSHALL
+cli > MONITOR
+```
