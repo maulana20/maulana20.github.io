@@ -79,3 +79,13 @@ cli > GET tus:xxx
 cli > FLUSHALL
 cli > MONITOR
 ```
+
+### Docker Python First
+```bash
+pip freeze > requirements.txt
+pip install -r requirements.txt
+--------------------------------------
+command: tail -f /dev/null
+ENV VIRTUAL_ENV=/app/env
+$ . env/bin/activate
+```
