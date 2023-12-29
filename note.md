@@ -27,9 +27,12 @@ sudo chown -R $USER:www-data {directory}
 sudo chmod -R 775 {directory}
 ```
 
-### Install Package Other PHP
+### Install Package
 ```bash
-/usr/bin/php7.3 /usr/local/bin/composer install
+/usr/bin/php7.3 /usr/local/bin/composer install => another php
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install xxx
 ```
 
 ### Restart `php.ini`
@@ -78,4 +81,26 @@ cli > KEYS tus:*
 cli > GET tus:xxx
 cli > FLUSHALL
 cli > MONITOR
+```
+
+### Docker Python First
+```bash
+pip freeze > requirements.txt
+pip install -r requirements.txt
+--------------------------------------
+command: tail -f /dev/null
+ENV VIRTUAL_ENV=/app/env
+$ . env/bin/activate
+```
+
+### Git Config
+```bash
+$PATH\.git\config
+```
+
+### Linux Information
+```bash
+uname -sr
+lsb_release -a
+sudo systemctl status xxx
 ```
