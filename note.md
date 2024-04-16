@@ -19,6 +19,8 @@ git reset --hard [commitId]
 git push --force
 git add [pathFile]
 git commit --amend --no-edit
+git rebase branch-parent
+git rebase --onto new-parent old-parent
 ```
 
 ### Permission Storage
