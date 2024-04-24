@@ -7,3 +7,4 @@ Jalankan perintah.
 bundle exec jekyll serve
 ```
 Maka akan tampil (lihat pada https://maulana20.github.io) dengan page thema [minima](https://github.com/jekyll/minima) .
+percobaan
