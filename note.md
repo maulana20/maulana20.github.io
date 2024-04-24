@@ -106,4 +106,4 @@ uname -sr
 lsb_release -a
 sudo systemctl status xxx
 ```
-percobaan
+percobaan1
