@@ -104,5 +104,15 @@ $PATH\.git\config
 ```bash
 uname -sr
 lsb_release -a
+
 sudo systemctl status xxx
+sudo service xxx status
+sudo service xxx reload
+
+sudo apt search xxx
+
+sudo usermod -aG docker jenkins
+
+export JAVA_HOME=/usr/bin/java
+echo $JAVA_HOME
 ```
