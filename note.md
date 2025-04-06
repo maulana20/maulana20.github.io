@@ -21,6 +21,7 @@ git add [pathFile]
 git commit --amend --no-edit
 git rebase branch-parent
 git rebase --onto new-parent old-parent
+git log --pretty=format:"%h - %an, %as : %s" --grep="feat:" --no-merges develop..feature-40
 ```
 
 ### Permission Storage
